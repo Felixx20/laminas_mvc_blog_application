@@ -2,14 +2,12 @@
 
 namespace Blog;
 
-use Laminas\ServiceManager\Factory\InvokableFactory;
+use Laminas\Router\Http\Segment;
+
+
 
 return [
-    'controllers' => [
-        'factories' => [
-            Controller\BlogController::class => InvokableFactory::class,
-        ],
-    ],
+
 
     'router' => [
         'routes' => [
@@ -22,7 +20,7 @@ return [
                         'id'     => '[0-9]+',
                     ],
                     'defaults' => [
-                        'controller' => Controller\BlogController::class,
+                        'controller' => Controller\PostController::class,
                         'action'     => 'index',
                     ],
                 ],

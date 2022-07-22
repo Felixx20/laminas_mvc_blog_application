@@ -1,0 +1,28 @@
+<?php
+
+
+$title = 'Latest Posts';
+$this->headTitle($title);
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+<p>
+    <a href="<?= $this->url('blog', ['action' => 'add']) ?>">Create a new post</a>
+</p>
+
+<table class="table">
+    <tr>
+        <th>Title</th>
+        <th>Artist</th>
+        <th>&nbsp;</th>
+    </tr>
+    <?php foreach ($posts as $post) : ?>
+    <tr>
+        <td><?= $this->escapeHtml($post->title) ?></td>
+        <td><?= $this->escapeHtml($post->text) ?></td>
+        <td>
+            <a href="<?= $this->url('blog', ['action' => 'edit', 'id' => $blog->id]) ?>">Edit</a>
+            <a href="<?= $this->url('blog', ['action' => 'delete', 'id' => $blog->id]) ?>">Delete</a>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+</table>
