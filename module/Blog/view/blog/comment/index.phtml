@@ -1,0 +1,42 @@
+<p>
+    <a href="<?= $this->url('createcomment', ['id' => $post->postID]) ?>">Create a new
+        comment</a>
+</p>
+
+
+<style>
+.post {
+    border-radius: 25px;
+    background: whitesmoke;
+    padding: 20px;
+    width: 90%;
+
+}
+
+.comments {
+    border-radius: 25px;
+    background: coral;
+    padding: 20px;
+    width: 80%;
+
+
+
+}
+</style>
+
+
+
+<dl class="post">
+    <dd><b><?= $this->escapeHtml($post->title) ?></b></dd>
+    <dd><?= $this->escapeHtml($post->text) ?></dd>
+</dl>
+
+
+<?php foreach ($comments as $comment) : ?>
+<dl class="comments">
+
+    <dd><?= $this->escapeHtml($comment->text) ?></dd>
+
+</dl>
+
+<?php endforeach; ?>

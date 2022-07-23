@@ -15,8 +15,8 @@ $this->headTitle($title);
     border-radius: 25px;
     background: whitesmoke;
     padding: 20px;
-    width: 200px;
-    height: 150px;
+    width: 90%;
+
 }
 </style>
 
@@ -27,8 +27,10 @@ $this->headTitle($title);
     <dd><b><?= $this->escapeHtml($post->title) ?></b></dd>
     <dd><?= $this->escapeHtml($post->text) ?></dd>
     <dd>
-        <a href="<?= $this->url('blog', ['action' => 'edit', 'id' => $blog->id]) ?>">Edit</a>
-        <a href="<?= $this->url('blog', ['action' => 'delete', 'id' => $blog->id]) ?>">Delete</a>
+        <p> <a href="<?= $this->url('comment', ['id' => $post->postID]) ?>">Comment</a></p>
+
+        <a href="<?= $this->url('blog', ['action' => 'edit', 'postID' => $post->postID]) ?>">Edit</a>
+        <a href="<?= $this->url('blog', ['action' => 'delete',  'postID' => $post->postID]) ?>">Delete</a>
     </dd>
 </dl>
 

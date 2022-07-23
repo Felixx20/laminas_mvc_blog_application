@@ -1,0 +1,39 @@
+<?php
+$title = 'Create a new comment';
+$this->headTitle($title);
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+<?php
+
+
+$text = $form->get('text');
+$text->setAttribute('class', 'form-control');
+$text->setAttribute('placeholder', 'Text');
+
+
+$submit = $form->get('submit');
+$submit->setAttribute('class', 'btn btn-primary');
+
+$form->setAttribute('comment', $this->url('blog', [
+    'action' => 'add',
+    'id'     => 1,
+]));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+?>
+<?php
+?>
+
+<div class="form-group">
+    <?= $this->formLabel($text) ?>
+    <?= $this->formElement($text) ?>
+    <?= $this->formElementErrors()->render($text, ['class' => 'help-block']) ?>
+</div>
+
+<?php
+echo $this->formSubmit($submit);
+echo $this->formHidden($form->get('id'));
+echo $this->formRow($form->get('postID'));
+echo $this->formRow($form->get('authorID'));
+echo $this->form()->closeTag();

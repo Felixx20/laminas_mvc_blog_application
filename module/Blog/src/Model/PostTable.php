@@ -3,6 +3,7 @@
 namespace Blog\Model;
 
 use RuntimeException;
+use DomainException;
 use Laminas\Db\TableGateway\TableGatewayInterface;
 
 class PostTable
