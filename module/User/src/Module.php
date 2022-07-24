@@ -42,6 +42,11 @@ class Module implements ConfigProviderInterface
                         $container->get(Model\UserTable::class)
                     );
                 },
+                Controller\LoginController::class => function ($container) {
+                    return new Controller\LoginController(
+                        $container->get(Model\UserTable::class)
+                    );
+                },
             ],
         ];
     }

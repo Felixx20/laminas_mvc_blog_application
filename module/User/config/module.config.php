@@ -21,7 +21,7 @@ return [
                     ],
                     'defaults' => [
                         'controller' => Controller\LoginController::class,
-                        'action'     => 'index',
+                        'action'     => 'login',
                     ],
                 ],
 

@@ -5,9 +5,7 @@ $title = 'Latest Posts';
 $this->headTitle($title);
 ?>
 <h1><?= $this->escapeHtml($title) ?></h1>
-<p>
-    <a href="<?= $this->url('blog', ['action' => 'add']) ?>">Create a new post</a>
-</p>
+
 
 
 <style>
@@ -16,9 +14,25 @@ $this->headTitle($title);
     background: whitesmoke;
     padding: 20px;
     width: 90%;
+}
 
+.register {
+    text-align: right;
 }
 </style>
+
+
+
+<p class="register">
+    <a href=" <?= $this->url('register', ['action' => 'index']) ?>">Create an account</a>
+</p>
+<p>
+    <a href="<?= $this->url('blog', ['action' => 'add']) ?>">Create a new post</a>
+</p>
+
+
+
+
 
 
 

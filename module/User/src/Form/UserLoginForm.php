@@ -24,7 +24,7 @@ class UserLoginForm extends Form
         ]);
         $this->add([
             'name' => 'password',
-            'type' => 'password',
+            'type' => 'text',
             'options' => [
                 'label' => 'Password',
             ],

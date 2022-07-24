@@ -23,7 +23,7 @@ class User
     {
         $this->userID     = !empty($data['userID']) ? $data['userID'] : null;
         $this->username = !empty($data['username']) ? $data['username'] : null;
-        $this->passsword  = !empty($data['passsword']) ? $data['passsword'] : null;
+        $this->password  = !empty($data['password']) ? $data['password'] : null;
     }
 
 
@@ -77,6 +77,7 @@ class User
             'filters' => [
                 ['name' => StripTags::class],
                 ['name' => StringTrim::class],
+
             ],
             'validators' => [
                 [

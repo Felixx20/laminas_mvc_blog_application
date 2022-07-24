@@ -5,6 +5,7 @@ namespace User\Model;
 use RuntimeException;
 use Laminas\Db\TableGateway\TableGatewayInterface;
 
+
 class UserTable
 {
     private $tableGateway;
@@ -35,7 +36,9 @@ class UserTable
     public function saveUser(User $user)
     {
 
+
         $hash = password_hash($user->password, PASSWORD_DEFAULT);
+
         $data = [
             'username' => $user->username,
             'password'  => $hash,
