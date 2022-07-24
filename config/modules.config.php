@@ -27,4 +27,5 @@ return [
     'Laminas\Diactoros',
     'Application',
     'Blog',
+    'User',
 ];
