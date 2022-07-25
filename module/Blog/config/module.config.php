@@ -6,7 +6,9 @@ use Laminas\Router\Http\Segment;
 
 
 
+
 return [
+
 
 
     'router' => [
@@ -43,6 +45,7 @@ return [
 
             ],
 
+
             'createcomment' => [
                 'type'    => Segment::class,
                 'options' => [
@@ -54,6 +57,8 @@ return [
                 ],
 
             ],
+
+
         ],
     ],
     'view_manager' => [

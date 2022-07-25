@@ -4,15 +4,25 @@ namespace User\Model;
 
 use RuntimeException;
 use Laminas\Db\TableGateway\TableGatewayInterface;
+use User\Model\User;
+use Laminas\Db\Adapter\Adapter as DbAdapter;
+use Laminas\Authentication\Adapter\DbTable\CallbackCheckAdapter as AuthAdapter;
+use Laminas\Authentication\AuthenticationService;
+use Laminas\Authentication\Storage\Session as SessionStorage;
 
 
 class UserTable
 {
     private $tableGateway;
+    public $auth;
 
-    public function __construct(TableGatewayInterface $tableGateway)
+
+
+
+    public function __construct(TableGatewayInterface $tableGateway, AuthenticationService $auth)
     {
         $this->tableGateway = $tableGateway;
+        $this->auth = $auth;
     }
 
     public function getUser($userID)
@@ -27,8 +37,22 @@ class UserTable
             ));
         }
 
+
         return $row;
     }
+
+    public function checkUsername($user)
+    {
+        $rowset =  $this->tableGateway->select(['username' => $user->username]);
+        $row = $rowset->current();
+        if (!$row) {
+            return true;
+        } else {
+            echo "Username already exists";
+            return false;
+        }
+    }
+
 
 
 
@@ -60,6 +84,55 @@ class UserTable
             ));
         }
 
+
         $this->tableGateway->update($data, ['id' => $userID]);
+    }
+
+    public function authenticate(User $user)
+    {
+
+        $passwordValidation = function ($hash, $password) {
+            return password_verify($password, $hash);
+        };
+
+
+        $dbAdapter = new DbAdapter([
+            'driver'   => 'Pdo',
+            'dsn' => 'mysql:dbname=blog;host=Localhost',
+            'username' => 'your_username',
+            'password' => 'your_password'
+        ]);
+
+        $authAdapter = new AuthAdapter($dbAdapter);
+
+        $authAdapter
+            ->setTableName('user')
+            ->setIdentityColumn('username')
+            ->setCredentialColumn('password');
+
+        $authAdapter
+            ->setCredentialValidationCallback($passwordValidation);
+
+        $authAdapter
+            ->setIdentity($user->username)
+            ->setCredential($user->password);
+
+
+        $this->auth = new AuthenticationService();
+
+        $this->auth->setStorage(new SessionStorage('UserSession'));
+
+
+        // Perform the authentication query, saving the result
+        $result = $this->auth->authenticate($authAdapter);
+
+        $this->identity = $result->getIdentity();
+
+        return $result;
+    }
+
+    public function getAuth()
+    {
+        return $this->auth;
     }
 }

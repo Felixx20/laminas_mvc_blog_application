@@ -6,6 +6,8 @@ use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\ResultSet\ResultSet;
 use Laminas\Db\TableGateway\TableGateway;
 use Laminas\ModuleManager\Feature\ConfigProviderInterface;
+use User;
+
 
 class Module implements ConfigProviderInterface
 {
@@ -39,6 +41,9 @@ class Module implements ConfigProviderInterface
                     $resultSetPrototype->setArrayObjectPrototype(new Model\Comment());
                     return new TableGateway('comment', $dbAdapter, null, $resultSetPrototype);
                 },
+
+
+
             ],
         ];
     }
@@ -49,7 +54,9 @@ class Module implements ConfigProviderInterface
             'factories' => [
                 Controller\PostController::class => function ($container) {
                     return new Controller\PostController(
-                        $container->get(Model\PostTable::class)
+                        $container->get(Model\PostTable::class),
+                        $container->get(User\Model\UserTable::class),
+
                     );
                 },
                 Controller\CommentController::class => function ($container) {

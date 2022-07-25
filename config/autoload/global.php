@@ -35,4 +35,20 @@ return [
 
         ],
     ],
+
+    'session_containers' => [
+        Laminas\Session\Container::class,
+    ],
+    'session_storage' => [
+        'type' => Laminas\Session\Storage\SessionStorage::class,
+    ],
+    'session_config' => [
+        'cache_expire' => 60 * 24 * 30,
+        'cookie_httponly' => true,
+        'cookie_lifetime' => 86400 * 30,
+        'gc_maxlifetime' => 86400 * 30,
+        'name' => 'mm3bb',
+        'remember_me_seconds' => 86400 * 30,
+        'use_cookies' => true,
+    ],
 ];

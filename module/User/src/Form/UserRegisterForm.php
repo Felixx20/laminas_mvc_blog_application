@@ -4,7 +4,7 @@ namespace User\Form;
 
 use Laminas\Form\Form;
 
-class UserLoginForm extends Form
+class UserRegisterForm extends Form
 {
     public function __construct($name = null)
     {
@@ -33,7 +33,7 @@ class UserLoginForm extends Form
             'name' => 'submit',
             'type' => 'submit',
             'attributes' => [
-                'value' => 'Login',
+                'value' => 'Register',
                 'id'    => 'submitbutton',
             ],
         ]);

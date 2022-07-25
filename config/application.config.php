@@ -9,6 +9,11 @@
  */
 
 return [
+
+    'session_config' => [
+        'phpSaveHandler' => 'redis',
+        'savePath' => 'tcp://127.0.0.1:6379?weight=1&timeout=1',
+    ],
     // Retrieve list of modules used in this application.
     'modules' => require __DIR__ . '/modules.config.php',
 

@@ -63,7 +63,7 @@ class Post implements InputFilterAwareInterface
                     'options' => [
                         'encoding' => 'UTF-8',
                         'min' => 1,
-                        'max' => 100,
+                        'max' => 200,
                     ],
                 ],
             ],
@@ -82,7 +82,7 @@ class Post implements InputFilterAwareInterface
                     'options' => [
                         'encoding' => 'UTF-8',
                         'min' => 1,
-                        'max' => 2000,
+                        'max' => 20000,
                     ],
                 ],
             ],

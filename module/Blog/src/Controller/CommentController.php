@@ -40,38 +40,35 @@ class CommentController extends AbstractActionController
     public function addAction()
     {
 
-        echo ("<script>console.log(1  );</script>");
+
         $form = new CommentForm();
         $form->get('submit')->setValue('Create a new Comment');
 
         $request = $this->getRequest();
-        echo ("<script>console.log(2  );</script>");
+
 
 
         if (!$request->isPost()) {
 
             return ['form' => $form];
         }
-        echo ("<script>console.log(2.2 );</script>");
 
         $comment = new Comment();
-        $comment->authorID = 1;
-        $comment->postID = 1;
         $form->setInputFilter($comment->getInputFilter());
         $form->setData($request->getPost());
-        echo ("<script>console.log(3 );</script>");
 
-        $string = $comment->authorID;
+
+
+
         if (!$form->isValid()) {
-            echo ("<script>console.log($string  );</script>");
-
             return ['form' => $form];
         }
 
-        echo ("<script>console.log(4  );</script>");
+        $id = (int) $this->params()->fromRoute('id');
         $comment->exchangeArray($form->getData());
+        $comment->postID = (int) $this->params()->fromRoute('id');
         $this->table->saveComment($comment);
-        return $this->redirect()->toRoute('blog');
+        return $this->redirect()->toRoute('comment', ['id' => $id]);
     }
 
     public function editAction()

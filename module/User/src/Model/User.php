@@ -19,6 +19,7 @@ class User
 
     private $inputFilter;
 
+
     public function exchangeArray(array $data)
     {
         $this->userID     = !empty($data['userID']) ? $data['userID'] : null;

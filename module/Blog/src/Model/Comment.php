@@ -24,8 +24,8 @@ class Comment implements InputFilterAwareInterface
     {
         $this->commentID   = !empty($data['commentID']) ? $data['commentID'] : null;
         $this->text     = !empty($data['text']) ? $data['text'] : null;
-        $this->authorID    = 1;
-        $this->postID    = 1;
+        $this->authorID    = !empty($data['authorID']) ? $data['authorID'] : null;
+        $this->postID    =  !empty($data['postID']) ? $data['postID'] : null;
     }
 
     public function setInputFilter(InputFilterInterface $inputFilter)
@@ -82,7 +82,7 @@ class Comment implements InputFilterAwareInterface
                     'options' => [
                         'encoding' => 'UTF-8',
                         'min' => 1,
-                        'max' => 1000,
+                        'max' => 2000,
                     ],
                 ],
             ],

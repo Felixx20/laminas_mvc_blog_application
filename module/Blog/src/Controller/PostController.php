@@ -7,18 +7,23 @@ use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 use Blog\Form\PostForm;
 use Blog\Model\Post;
-
+use User\Model\UserTable;
 
 class PostController extends AbstractActionController
 
 {
 
     private $table;
+    private $usertable;
 
 
-    public function __construct(PostTable $table)
+
+
+
+    public function __construct(PostTable $table, UserTable $usertable)
     {
         $this->table = $table;
+        $this->usertable = $usertable;
     }
     public function indexAction()
     {
@@ -29,6 +34,13 @@ class PostController extends AbstractActionController
 
     public function addAction()
     {
+
+        /*
+        if (!$this->usertable->auth->hasIdentity()) {
+
+            return $this->redirect()->toRoute('login');
+        }
+        */
 
         $form = new PostForm();
         $form->get('submit')->setValue('Create a new Blog Post');
@@ -49,7 +61,6 @@ class PostController extends AbstractActionController
         }
 
 
-
         $post->exchangeArray($form->getData());
         $this->table->savePost($post);
         return $this->redirect()->toRoute('blog');
@@ -62,19 +73,4 @@ class PostController extends AbstractActionController
     public function deleteAction()
     {
     }
-
-
-    /*
-    public function commentsAction()
-    {
-
-        $id = (int) $this->params()->fromRoute('id');
-
-        return new ViewModel([
-            'post' => $this->table->getPost($id),
-            'comments' => $this->table->fetchAll(),
-
-        ]);
-    }
-    */
 }

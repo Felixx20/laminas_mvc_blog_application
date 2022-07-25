@@ -5,7 +5,7 @@ namespace User\Controller;
 use User\Model\UserTable;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
-use User\Form\UserLoginForm;
+use User\Form\UserRegisterForm;
 use User\Model\User;
 
 
@@ -21,10 +21,11 @@ class RegisterController extends AbstractActionController
     }
 
 
-    public function indexAction()
+    public function registerAction()
     {
-        $form = new UserLoginForm();
-        $form->get('submit')->setValue('Add');
+
+        $form = new UserRegisterForm();
+        $form->get('submit')->setValue('Register');
 
         $request = $this->getRequest();
 
@@ -41,7 +42,14 @@ class RegisterController extends AbstractActionController
         }
 
         $user->exchangeArray($form->getData());
-        $this->table->saveUser($user);
-        return $this->redirect()->toRoute('blog');
+
+
+        //check if username is free
+        if (!$this->table->checkUsername($user)) {
+            return $this->redirect()->toRoute('register');
+        } else {
+            $this->table->saveUser($user);
+            return $this->redirect()->toRoute('login');
+        }
     }
 }

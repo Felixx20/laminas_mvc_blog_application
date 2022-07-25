@@ -34,6 +34,6 @@ echo $this->form()->openTag($form);
 <?php
 echo $this->formSubmit($submit);
 echo $this->formHidden($form->get('id'));
-echo $this->formRow($form->get('postID'));
+echo $this->formHidden($form->get('postID'));
 echo $this->formRow($form->get('authorID'));
 echo $this->form()->closeTag();

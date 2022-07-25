@@ -9,6 +9,7 @@ use Laminas\Router\Http\Segment;
 return [
 
 
+
     'router' => [
         'routes' => [
             'login' => [
@@ -37,7 +38,7 @@ return [
                     ],
                     'defaults' => [
                         'controller' => Controller\RegisterController::class,
-                        'action'     => 'index',
+                        'action'     => 'register',
                     ],
                 ],
 
@@ -56,6 +57,8 @@ return [
             ],
         ],
     ],
+
+
 
 
     'view_manager' => [
